@@ -1,2 +1,2 @@
 # mini-microservice
-mini-microservice
+mini-microservice: event-bus
