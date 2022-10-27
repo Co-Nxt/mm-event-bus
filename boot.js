@@ -12,16 +12,16 @@ app.post('/events', (req, res) => {
     events.push(event)
 
     console.log('Events pushed:', events)
-    axios.post('http://localhost:3001/events', event).catch((err) => {
+    axios.post('http://comment-svc:3001/events', event).catch((err) => {
         console.log(err.message);
       });
-    axios.post('http://localhost:3002/events', event).catch((err) => {
+    axios.post('http://post-clusterip-srv:3002/events', event).catch((err) => {
         console.log(err.message);
       });
-    axios.post('http://localhost:5005/events', event).catch((err) => {
+    axios.post('http://query-svc:5005/events', event).catch((err) => {
         console.log(err.message);
       });
-    axios.post('http://localhost:5010/events', event).catch((err) => {
+    axios.post('http://moderation-svc:5010/events', event).catch((err) => {
         console.log(err.message);
       });
 
