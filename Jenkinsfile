@@ -16,14 +16,14 @@ pipeline {
     }
     stage('Test') {
       steps {
-        script {
-         docker.push("konicsdev/event-bus")
-        }
+       
       }
     }
     stage('Push Image to Artifactory') {
       steps {
-       
+        script {
+         docker.push("konicsdev/event-bus")
+        }
       }
     }
     stage('Deploy') {
