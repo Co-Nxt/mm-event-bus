@@ -3,8 +3,8 @@ pipeline {
   stages {
     stage('Checkout') {
       steps {
-        git branch: 'main',
-        url: 'https://github.com/Co-Nxt/mm-event-bus'
+        checkout([$class: 'GitSCM', branches: [[name: 'main']], 
+        userRemoteConfigs: [[url: 'https://github.com/Co-Nxt/mm-event-bus.git']]])
       }
     }
     stage('Build') {
