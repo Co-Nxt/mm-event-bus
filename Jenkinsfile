@@ -1,7 +1,6 @@
 pipeline {
   agent any
-  
-  
+
   stages {
     stage('Checkout') {
       steps {
@@ -13,12 +12,17 @@ pipeline {
       steps{
         echo 'Building...'
         script {
-          try{
-         docker.build("konicsdev/event-bus")
+            def imageName = 'konicsdev/event-bus'
+            def registryUrl = 'https://hub.docker.com/'
+            def dockerfile = 'Dockerfile'
 
-          }catch(err){
-            echo "Failed: ${err}"
-          }
+              // Build the Docker image
+            docker.build(imageName, "-f ${dockerfile} .")
+
+              // Push the Docker image to the registry
+            docker.withRegistry(registryUrl) {
+              docker.image(imageName).push()
+            }
         }
       }
     }
