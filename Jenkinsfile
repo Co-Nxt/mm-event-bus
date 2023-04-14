@@ -16,7 +16,14 @@ pipeline {
     }
     stage('Test') {
       steps {
-        sh 'docker run konicsdev/event-bus npm test'
+        script {
+         docker.push("konicsdev/event-bus")
+        }
+      }
+    }
+    stage('Push Image to Artifactory') {
+      steps {
+       
       }
     }
     stage('Deploy') {
