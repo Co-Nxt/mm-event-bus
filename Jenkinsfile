@@ -12,10 +12,7 @@ pipeline {
       steps{
         echo 'Building...'
         script {
-                          def registry = 'https://hub.docker.com/repository/docker/'
-                    def dockerImage = docker.build("${registry}/konicsdev/event-bus")
-                    docker.withRegistry(registry, credentialsId: 'Docker_acct') {
-                        dockerImage.push()
+              docker.build("/konicsdev/event-bus")
             }
         }
       }
