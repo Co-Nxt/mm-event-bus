@@ -9,7 +9,7 @@ pipeline {
     }
     stage('Build') {
       steps {
-        sh 'docker build -t konicsdev/event-bus .'
+         docker.build("konicsdev/event-bus")
       }
     }
     stage('Test') {
