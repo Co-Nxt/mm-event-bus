@@ -1,5 +1,10 @@
 pipeline {
-  agent any
+  agent {
+      docker {
+            image 'node:16-alpine'
+            label 'docker'
+        }
+  }
 
   stages {
     stage('Checkout') {
@@ -12,16 +17,10 @@ pipeline {
       steps{
         echo 'Building...'
         script {
-            def imageName = 'konicsdev/event-bus'
-            def registryUrl = 'https://hub.docker.com/'
-            def dockerfile = 'Dockerfile'
-
-              // Build the Docker image
-            docker.build(imageName, "-f ${dockerfile} .")
-
-              // Push the Docker image to the registry
-            docker.withRegistry(registryUrl) {
-              docker.image(imageName).push()
+                          def registry = 'https://hub.docker.com/repository/docker/'
+                    def dockerImage = docker.build("${registry}/konicsdev/event-bus")
+                    docker.withRegistry(registry, credentialsId: 'Docker_acct') {
+                        dockerImage.push()
             }
         }
       }
