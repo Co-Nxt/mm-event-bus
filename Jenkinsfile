@@ -1,9 +1,5 @@
 pipeline {
-  agent {
-      docker {
-            image 'jenkins/jnlp-agent-docker'
-        }
-  }
+  agent any
 
   stages {
     stage('Checkout') {
