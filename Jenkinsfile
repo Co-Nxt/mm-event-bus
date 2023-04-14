@@ -28,7 +28,11 @@ pipeline {
     stage('Push Image to Artifactory') {
       steps {
         script {
-         docker.push("konicsdev/event-bus")
+          try{
+           docker.push("konicsdev/event-bus")
+          }catch(err){
+            echo "Failed: ${err}"
+          }
         }
       }
     }
