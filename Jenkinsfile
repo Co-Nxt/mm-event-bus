@@ -12,7 +12,7 @@ pipeline {
       steps{
         echo 'Building...'
         script {
-              docker.build("/konicsdev/event-bus:latest")
+              docker.build("/konicsdev/eventbus:latest")
             }
         }
       }
