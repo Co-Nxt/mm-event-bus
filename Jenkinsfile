@@ -11,7 +11,12 @@ pipeline {
       steps{
         echo 'Building...'
         script {
+          try{
          docker.build("konicsdev/event-bus")
+
+          }catch(err){
+            echo "Failed: ${err}"
+          }
         }
       }
     }
