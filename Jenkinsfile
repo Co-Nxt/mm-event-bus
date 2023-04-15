@@ -1,5 +1,5 @@
 pipeline {
-  agent { label 'dind'}
+  agent { label 'node-docker-slave'}
 
   stages {
     stage('Checkout') {
