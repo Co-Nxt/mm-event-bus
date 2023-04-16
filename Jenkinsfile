@@ -1,5 +1,7 @@
 pipeline {
-  agent { label 'node-docker-slave'}
+  agent { 
+     docker { image 'node:16.13.1-alpine' }
+  }
 
   stages {
     stage('Checkout') {
@@ -12,6 +14,7 @@ pipeline {
       steps{
         echo 'Building...'
         script {
+            sh 'node --version'
               docker.build("konicsdev/event-bus")
             }
         }
