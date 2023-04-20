@@ -1,47 +1,19 @@
 pipeline {
   agent { 
-     docker { image 'node:16.13.1-alpine' }
+     docker {
+            image 'node:lts-bullseye-slim'
+            args '-p 3000:3000'
+        }
   }
 
   stages {
-    stage('Checkout') {
-      steps {
-        checkout([$class: 'GitSCM', branches: [[name: 'main']], 
-        userRemoteConfigs: [[url: 'https://github.com/Co-Nxt/mm-event-bus.git']]])
-      }
-    }
     stage('Build') {
       steps{
         echo 'Building...'
         script {
-            sh 'node --version'
-              docker.build("konicsdev/event-bus")
+            sh 'npm install'
             }
         }
-      }
-
-    stage('Test') {
-      steps {
-       echo 'Testing...'
-      }
     }
-    stage('Push Image to Artifactory') {
-      steps {
-        script {
-          try{
-           docker.push("konicsdev/event-bus")
-          }catch(err){
-            echo "Failed: ${err}"
-          }
-        }
-      }
-    }
-    stage('Deploy') {
-      steps {
-        sshagent(['my-vps']) {
-          sh 'ssh -o StrictHostKeyChecking=no -p 22 root@139.180.209.94 "cd /var/www/event-bus && git pull && docker-compose up -d"'
-        }
-      }
-    }
-  }
+}
 }
