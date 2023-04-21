@@ -5,10 +5,9 @@ pipeline {
   stages {
     stage('Setup') {
       steps {
-        git branch: 'main',
-        url: 'https://github.com/Co-Nxt/mm-event-bus'
-         currentBuild.setBuildDescriptionForPipeline('<b>Branch:</b>main <br> <b> commitId:</b> 123<br>')
-
+       script{
+          currentBuild.setBuildDescriptionForPipeline('<b>Branch:</b>main <br> <b> commitId:</b> 123<br>')
+       }
       }
     }
     stage('Build') {
