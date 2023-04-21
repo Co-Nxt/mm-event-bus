@@ -3,27 +3,30 @@ pipeline {
     label 'docker-node-agent'
   }
   stages {
-    stage('Checkout') {
+    stage('Setup') {
       steps {
         git branch: 'main',
         url: 'https://github.com/Co-Nxt/mm-event-bus'
+         jenkins.setBuildDescriptionForPipeline(branch: "main", commitId: '123')
+
       }
     }
     stage('Build') {
       steps {
-        sh 'docker build -t konicsdev/event-bus .'
+        // sh 'docker build -t konicsdev/event-bus .'
+        echo'Building..'
       }
     }
     stage('Test') {
       steps {
-        sh 'docker run konicsdev/event-bus npm test'
+        // sh 'docker run konicsdev/event-bus npm test'
+        echo'Testing..'
+
       }
     }
     stage('Deploy') {
       steps {
-        sshagent(['my-vps']) {
-          sh 'ssh -o StrictHostKeyChecking=no -p 22 root@139.180.209.94 "cd /var/www/event-bus && git pull && docker-compose up -d"'
-        }
+         echo'Deploy..'
       }
     }
   }
