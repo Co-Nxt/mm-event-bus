@@ -7,10 +7,12 @@ pipeline {
       steps {
        script{
         
-         def branchName = sh(returnStdout: true, script: 'git rev-parse --abbrev-ref HEAD').trim()
-         def commitId = sh(returnStdout: true, script: 'git rev-parse HEAD').trim()
-          def description = "<b>Build ${env.BUILD_NUMBER}:</b><br>Branch: ${branchName}<br>Commit ID: ${commitId}"
-               currentBuild.setDescription(description)
+        def branchName = sh(returnStdout: true, script: 'git rev-parse --abbrev-ref HEAD').trim()
+        def commitId = sh(returnStdout: true, script: 'git rev-parse HEAD').trim()
+        def commitMessage = sh(returnStdout: true, script: 'git log -1 --pretty=format:"%s"').trim()
+        def commitAuthor = sh(returnStdout: true, script: 'git log -1 --pretty=format:"%an"').trim()
+        def description = "<br> <b>Branch: </b> ${branchName}<br> <b>Commit ID:</b> ${commitId} <br> <b>Author:</b> ${commitAuthor} <br> <b> CommitMessage: <b> ${commitMessage} <br>"
+          currentBuild.setDescription(description)
        
        }
       }
