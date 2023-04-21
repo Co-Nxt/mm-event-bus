@@ -6,7 +6,7 @@ pipeline {
     stage('Setup') {
       steps {
        script{
-          currentBuild.setBuildDescriptionForPipeline('<b>Branch:</b>main <br> <b> commitId:</b> 123<br>')
+          jenkins.setBuildDescriptionForPipeline("<b>Branch:</b>main <br> <b> commitId:</b> 123 <br>")
        }
       }
     }
