@@ -7,7 +7,7 @@ pipeline {
       steps {
         git branch: 'main',
         url: 'https://github.com/Co-Nxt/mm-event-bus'
-         jenkins.setBuildDescriptionForPipeline(branch: "main", commitId: '123')
+         jenkins.setBuildDescriptionForPipeline('<b>Branch:</b>main <br> <b> commitId:</b> 123<br>')
 
       }
     }
