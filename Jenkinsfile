@@ -6,7 +6,7 @@ pipeline {
     stage('Setup') {
       steps {
        script{
-          currentBuild.setDescription("<b>Branch:</b>main <br> <b> commitId:</b> 123 <br>")
+          currentBuild.setDescription("<b> Branch: </b> main <br> <b> commitId: </b> 123 <br>")
        }
       }
     }
