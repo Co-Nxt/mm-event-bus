@@ -6,7 +6,12 @@ pipeline {
     stage('Setup') {
       steps {
        script{
-          currentBuild.setDescription("<b> Branch: </b> main <br> <b> commitId: </b> 123 <br>")
+        
+         def branchName = sh(returnStdout: true, script: 'git rev-parse --abbrev-ref HEAD').trim()
+         def commitId = sh(returnStdout: true, script: 'git rev-parse HEAD').trim()
+          def description = "<b>Build ${env.BUILD_NUMBER}:</b><br>Branch: ${branchName}<br>Commit ID: ${commitId}"
+               currentBuild.setDescription(description)
+       
        }
       }
     }
