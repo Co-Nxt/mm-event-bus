@@ -20,7 +20,8 @@ pipeline {
       steps {
         
         sh 'docker version'
-        sh'docker build -t konicsdev/even-bus .'
+        docker.build("konicsdev/even-bus:${env.BUILD_NUMBER}")
+        //sh'docker build -t konicsdev/even-bus .'
         echo'Building..'
       }
     }
