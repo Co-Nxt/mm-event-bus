@@ -20,8 +20,8 @@ pipeline {
       steps {
         
         sh 'docker version'
-        docker.build("konicsdev/even-bus:${env.BUILD_NUMBER}")
-        //sh'docker build -t konicsdev/even-bus .'
+        //docker.build("konicsdev/even-bus:${env.BUILD_NUMBER}")
+        sh'docker build -t konicsdev/even-bus:${BUILD_NUMBER}'
         echo'Building..'
       }
     }
@@ -34,7 +34,8 @@ pipeline {
     }
     stage('Push to Dockerhub') {
       steps {
-        
+        sh 'docker login -u konicsdev -p konics.dev'
+        sh 'docker push konicsdev/even-bus:${BUILD_NUMBER}'
         //sh'docker build -t konicsdev/even-bus .'
         echo'Pushing..'
       }
