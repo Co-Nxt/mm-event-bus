@@ -19,10 +19,10 @@ pipeline {
     stage('Build Docker Image') {
       steps {
         sh 'docker version'
-         //docker.build("konicsdev/event-bus:${env.BUILD_NUMBER}")
+         docker.build("konicsdev/event-bus:${env.BUILD_NUMBER}")
         echo'Building..'
         script{
-         myImage = docker.build("konicsdev/event-bus:${env.BUILD_NUMBER}") // build the Dockerfile
+         //myImage = docker.build("konicsdev/event-bus:${env.BUILD_NUMBER}") // build the Dockerfile
         }
       }
     }
