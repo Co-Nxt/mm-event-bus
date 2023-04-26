@@ -40,7 +40,7 @@ pipeline {
     stage('Push to Dockerhub') {
       steps {
         sh 'docker login -u konicsdev -p konics.dev'
-        sh 'docker push konicsdev/even-bus:${BUILD_NUMBER}'
+        sh 'docker push ${DOCKER_IMAGE_NAME}:${BUILD_NUMBER}'
         //sh'docker build -t konicsdev/even-bus .'
         echo'Pushing..'
       }
