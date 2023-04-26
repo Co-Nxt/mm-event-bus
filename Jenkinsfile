@@ -1,7 +1,7 @@
 pipeline {
   agent any
    environment {
-        DOCKER_IMAGE_NAME = 'konicsdev/even-bus'
+        DOCKER_IMAGE_NAME = 'konicsdev/eventbus'
         VULTR_SERVER_IP = '149.28.159.113'
         VULTR_SERVER_USER = 'root'
         VULTR_SERVER_SSH_PORT = '22'
