@@ -1,6 +1,6 @@
 pipeline {
   agent {
-    label 'docker-node-agent'
+    any
   }
   stages {
     stage('Setup') {
