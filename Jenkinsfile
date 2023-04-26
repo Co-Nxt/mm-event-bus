@@ -31,6 +31,13 @@ pipeline {
 
       }
     }
+    stage('Push to Dockerhub') {
+      steps {
+        
+        //sh'docker build -t konicsdev/even-bus .'
+        echo'Pushing..'
+      }
+    }
     stage('Deploy') {
       steps {
          echo'Deploy..'
