@@ -1,6 +1,11 @@
 pipeline {
   agent any
-  
+   environment {
+        DOCKER_IMAGE_NAME = 'konicsdev/even-bus'
+        VULTR_SERVER_IP = '149.28.159.113'
+        VULTR_SERVER_USER = 'root'
+        VULTR_SERVER_SSH_PORT = '22'
+    }
   stages {
     stage('Setup') {
       steps {
@@ -21,7 +26,7 @@ pipeline {
         
         sh 'docker version'
         //docker.build("konicsdev/even-bus:${env.BUILD_NUMBER}")
-        sh'docker build -t konicsdev/even-bus:${BUILD_NUMBER} .'
+        sh'docker build -t ${DOCKER_IMAGE_NAME}:${BUILD_NUMBER} .'
         echo'Building..'
       }
     }
@@ -42,6 +47,7 @@ pipeline {
     }
     stage('Deploy') {
       steps {
+         sh "sshpass -p 'your-vultr-server-password' ssh -o StrictHostKeyChecking=no $VULTR_SERVER_USER@$VULTR_SERVER_IP -p $VULTR_SERVER_SSH_PORT 'docker stop $DOCKER_IMAGE_NAME || true && docker rm $DOCKER_IMAGE_NAME || true && docker pull $DOCKER_IMAGE_NAME && docker run -d --name $DOCKER_IMAGE_NAME -p 80:80 $DOCKER_IMAGE_NAME'"
          echo'Deploy..'
       }
     }
