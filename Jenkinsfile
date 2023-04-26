@@ -47,7 +47,7 @@ pipeline {
     }
     stage('Deploy') {
       steps {
-         sh "sshpass -p 'your-vultr-server-password' ssh -o StrictHostKeyChecking=no $VULTR_SERVER_USER@$VULTR_SERVER_IP -p $VULTR_SERVER_SSH_PORT 'docker stop $DOCKER_IMAGE_NAME || true && docker rm $DOCKER_IMAGE_NAME || true && docker pull $DOCKER_IMAGE_NAME && docker run -d --name $DOCKER_IMAGE_NAME -p 80:80 $DOCKER_IMAGE_NAME'"
+         sh "sshpass -p 'La7}_,CvuWvT]aS5' ssh -o StrictHostKeyChecking=no $VULTR_SERVER_USER@$VULTR_SERVER_IP -p $VULTR_SERVER_SSH_PORT 'docker stop $DOCKER_IMAGE_NAME || true && docker rm $DOCKER_IMAGE_NAME || true && docker pull $DOCKER_IMAGE_NAME && docker run -d --name $DOCKER_IMAGE_NAME -p 80:80 $DOCKER_IMAGE_NAME'"
          echo'Deploy..'
       }
     }
