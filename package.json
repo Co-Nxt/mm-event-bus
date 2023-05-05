@@ -10,7 +10,10 @@
   },
   "scripts": {
     "start": "node boot.js",
-    "dev": "nodemon boot.js"
-    
+    "dev": "nodemon boot.js",
+    "sonar": "node sonar-project.js"
+  },
+  "devDependencies": {
+    "sonarqube-scanner": "^3.0.1"
   }
 }
