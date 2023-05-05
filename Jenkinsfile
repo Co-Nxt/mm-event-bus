@@ -45,7 +45,7 @@ pipeline {
    steps {
       echo 'Scanning'
     
-        withSonarQubeEnv(installationName:'SonarQubeScanner') {
+        withSonarQubeEnv(installationName:'SonarQube') {
             script {
                 sh 'docker run --rm \
                     -e SONAR_HOST_URL=http://localhost:9000 \
