@@ -12,7 +12,7 @@ pipeline {
     stage('Setup') {
       steps {
        script{
-        def sonarToke = env.sonarqube_token;
+       
         def branchName = sh(returnStdout: true, script: 'git rev-parse --abbrev-ref HEAD').trim()
         def commitId = sh(returnStdout: true, script: 'git rev-parse HEAD').trim()
         def commitMessage = sh(returnStdout: true, script: 'git log -1 --pretty=format:"%s"').trim()
@@ -43,13 +43,13 @@ pipeline {
         branch 'develop'
       }
    steps {
-      echo 'Scanning ${sonarToke}'
-      echo "${sonarToke}"
+      echo 'Scanning'
+    
         withSonarQubeEnv(installationName:'SonarQubeScanner') {
             script {
                 sh 'docker run --rm \
                     -e SONAR_HOST_URL=http://localhost:9000 \
-                    -e SONAR_LOGIN=${sonarToke} \
+                    -e SONAR_LOGIN=1234 \
                     eventbus sonarqube-article'
             }
         }
