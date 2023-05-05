@@ -67,7 +67,7 @@ pipeline {
                 channel: '#jenkins-pipeline-notifications',
                 replyBroadcast: true,
                 color: 'good',
-                message: 'Successfully Deployed. \n Build:${env.BUILD_NUMBER} \n Image: ${env.DOCKER_IMAGE_NAME}:${env.BUILD_NUMBER}'
+                message: 'Successfully Deployed. \n Build: ${env.BUILD_NUMBER} \n Image: ${env.DOCKER_IMAGE_NAME} : ${env.BUILD_NUMBER}'
               ) 
             }
         }
