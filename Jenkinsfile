@@ -42,7 +42,9 @@ pipeline {
       when{
         branch 'develop'
       }
-   
+   steps {
+      echo 'Scanning'
+   }
     }
     stage('Push to Dockerhub') {
       steps {
