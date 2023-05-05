@@ -40,6 +40,14 @@ pipeline {
 
       }
     }
+    stage ('Scan'){
+      when{
+        branch 'develop'
+      }
+      steps{
+        echo 'Scanning'
+      }
+    }
     stage('Push to Dockerhub') {
       steps {
         sh 'docker login -u konicsdev -p konics.dev'
