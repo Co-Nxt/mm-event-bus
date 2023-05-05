@@ -50,7 +50,7 @@ pipeline {
                 sh 'docker run --rm \
                     -e SONAR_HOST_URL=http://localhost:9000 \
                     -e SONAR_LOGIN={AQAAABAAAAAwG25KPwoCEGoAoUfYvkFhSsUsg6rKNY1wjcTF4e3mzZSos0sTrr+/UWr+oECyC9Ldj7lJpbwHIVHBXDDsCccB0w==} \
-                    "${DOCKER_IMAGE_NAME}:${BUILD_NUMBER}" ./node_modules//sonarqube-scanner -Dproject.settings=sonar-project.properties'
+                    "${DOCKER_IMAGE_NAME}:${BUILD_NUMBER}" ./node_modules/sonarqube-scanner -Dproject.settings=sonar-project.properties'
               
 
                 // sh 'docker run --rm -e SONAR_HOST_URL=http://host.docker.internal:9000 -v "$(pwd):/mm-event-bus" sonarqube-article'
