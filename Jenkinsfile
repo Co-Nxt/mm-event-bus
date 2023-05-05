@@ -50,7 +50,7 @@ pipeline {
                 sh 'docker run --rm \
                     -e SONAR_HOST_URL=http://localhost:9000 \
                     -e SONAR_LOGIN=${sonarToke} \
-                    event-bus sonarqube-article'
+                    mm-event-bus sonarqube-article'
             }
         }
    }
