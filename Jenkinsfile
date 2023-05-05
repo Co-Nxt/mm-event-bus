@@ -40,12 +40,19 @@ pipeline {
 
       }
     }
-    stage ('Scan'){
+    stage ('SonarQube analysis'){
       when{
         branch 'develop'
       }
       steps{
         echo 'Scanning'
+        // withSonarQubeEnv(intallationName:'sq1'){
+        //   'sh '
+        // }
+          withSonarQubeEnv('SonarQube') {
+            sh 'npm install'
+            sh 'sonar-scanner'
+        }
       }
     }
     stage('Push to Dockerhub') {
