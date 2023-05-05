@@ -47,12 +47,12 @@ pipeline {
     
         withSonarQubeEnv(installationName:'SonarQube') {
             script {
-                sh 'docker run --rm \
-                    -e SONAR_HOST_URL=http://localhost:9000 \
-                    -e SONAR_LOGIN={AQAAABAAAAAwG25KPwoCEGoAoUfYvkFhSsUsg6rKNY1wjcTF4e3mzZSos0sTrr+/UWr+oECyC9Ldj7lJpbwHIVHBXDDsCccB0w==} \
-                    "${DOCKER_IMAGE_NAME}:${BUILD_NUMBER}" ./node_modules/sonarqube-scanner/src/bin/sonar-scanner -Dproject.settings=sonar-project.properties'
+                // sh 'docker run --rm \
+                //     -e SONAR_HOST_URL=http://localhost:9000 \
+                //     -e SONAR_LOGIN={AQAAABAAAAAwG25KPwoCEGoAoUfYvkFhSsUsg6rKNY1wjcTF4e3mzZSos0sTrr+/UWr+oECyC9Ldj7lJpbwHIVHBXDDsCccB0w==} \
+                //     "${DOCKER_IMAGE_NAME}:${BUILD_NUMBER}" ./node_modules/sonarqube-scanner/src/bin/sonar-scanner -Dproject.settings=sonar-project.properties'
               
-
+              sh "/home/jenkins/tools/hudson.plugins.sonar.SonarRunnerInstallation/sonarqubescanner/bin/sonar-scanner -Dsonar.host.url=http://localhost:9000 -Dsonar.projectName=meanstackapp -Dsonar.projectVersion=1.0 -Dsonar.projectKey=meanstack:app -Dsonar.sources=. -Dsonar.projectBaseDir=/home/jenkins/workspace/HHA_develop"
                 // sh 'docker run --rm -e SONAR_HOST_URL=http://host.docker.internal:9000 -v "$(pwd):/mm-event-bus" sonarqube-article'
 
               // sh './node_modules/.bin/sonar-scanner -Dproject.settings=sonar-project.properties'
