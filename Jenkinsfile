@@ -50,8 +50,7 @@ pipeline {
             }
             //other scan
         }
-    }
-    
+    }  
       stage('Push Image to Artifactory') {
         steps {
           sh 'docker login -u konicsdev -p konics.dev'
@@ -67,4 +66,5 @@ pipeline {
             }
         }
     }
+}
 }
