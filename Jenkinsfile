@@ -55,9 +55,7 @@ pipeline {
       stage('Push Image to Artifactory') {
         steps {
           sh 'docker login -u konicsdev -p konics.dev'
-          sh 'docker push ${DOCKER_IMAGE_NAME
-            }:${BUILD_NUMBER
-            }'
+          sh 'docker push ${DOCKER_IMAGE_NAME}:${BUILD_NUMBER}'
           echo'Pushing..'
         }
     }
