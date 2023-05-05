@@ -42,19 +42,7 @@ pipeline {
       when{
         branch 'develop'
       }
-      steps{
-        echo 'Scanning'
-        // withSonarQubeEnv(intallationName:'sq1'){
-        //   'sh '
-        // }       
-           nodeJS(nodeJSInstallationName: 'nodejs18.6'){
-              sh 'npm install'
-                withSonarQubeEnv('SonarQube') {
-                  sh 'npm install sonar-scanner'
-                  sh 'npm run sonar' 
-            }
-        
-      }
+   
     }
     stage('Push to Dockerhub') {
       steps {
