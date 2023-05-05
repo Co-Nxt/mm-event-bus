@@ -18,8 +18,12 @@ pipeline {
               def commitAuthor = sh(returnStdout: true, script: 'git log -1 --pretty=format:"%an"').trim()
               def description = "<br> <b>Branch: </b> ${branchName}<br> <b>Commit ID:</b> ${commitId} <br> <b>Author:</b> ${commitAuthor} <br> <b> CommitMessage: </b> ${commitMessage} <br>"
                   currentBuild.setDescription(description)
-                  
-              slackSend channel: '#jenkins-pipeline-notifications', color: 'good', message: "started ${env.JOB_NAME}"
+
+              slackSend channel: '#jenkins-pipeline-notifications', color: 'good', message: "Build Started: \n
+              Job Name: ${env.JOB_NAME} \n
+              Build Number:  ${env.BUILD_NUMBER} \n
+              Build URL: (<${env.BUILD_URL}|Open>)
+              "
             }
         }
     }
@@ -67,7 +71,7 @@ pipeline {
                 channel: '#jenkins-pipeline-notifications',
                 replyBroadcast: true,
                 color: 'good',
-                message: 'Successfully Deployed. \n Build:${BUILD_NUMBER} \n Image: ${DOCKER_IMAGE_NAME}:${BUILD_NUMBER}'
+                message: 'Successfully Deployed. \n Build:${env.BUILD_NUMBER} \n Image: ${env.DOCKER_IMAGE_NAME}:${env.BUILD_NUMBER}'
               ) 
             }
         }
