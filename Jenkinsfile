@@ -44,6 +44,9 @@ pipeline {
       }
    steps {
       echo 'Scanning'
+       nodeJS(nodeJSInstallationName: 'nodejs18.6'){
+         sh 'npm install'
+       }
    }
     }
     stage('Push to Dockerhub') {
