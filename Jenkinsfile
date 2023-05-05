@@ -46,14 +46,12 @@ pipeline {
         echo 'Scanning'
         // withSonarQubeEnv(intallationName:'sq1'){
         //   'sh '
-        // }
-        
-            nodeJS(nodeJSInstallationName: 'nodejs18.6'){
+        // }       
+           nodeJS(nodeJSInstallationName: 'nodejs18.6'){
               sh 'npm install'
-                withSonarQubeEnv('SonarQube') {{
+                withSonarQubeEnv('SonarQube') {
                   sh 'npm install sonar-scanner'
-                  sh 'npm run sonar'
-                }
+                  sh 'npm run sonar' 
             }
         
       }
