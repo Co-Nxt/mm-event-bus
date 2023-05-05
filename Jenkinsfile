@@ -44,7 +44,7 @@ pipeline {
       }
    steps {
       echo 'Scanning ${sonarToke}'
-      echo ${sonarToke}
+      echo '${sonarToke}'
         withSonarQubeEnv('My SonarQube Server') {
             script {
                 sh 'docker run --rm \
