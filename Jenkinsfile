@@ -26,8 +26,6 @@ pipeline {
     }
     stage('Build Docker Image') {
       steps {
-  
-        sh 'docker version'
         //docker.build("konicsdev/even-bus:${env.BUILD_NUMBER}")
         sh'docker build -t ${DOCKER_IMAGE_NAME}:${BUILD_NUMBER} .'
         echo'Building..'
@@ -49,10 +47,15 @@ pipeline {
         // withSonarQubeEnv(intallationName:'sq1'){
         //   'sh '
         // }
-          withSonarQubeEnv('SonarQube') {
-            sh 'npm install'
-            sh 'sonar-scanner'
-        }
+        
+            nodeJS(nodeJSInstallationName: 'nodejs18.6'){
+              sh 'npm install'
+                withSonarQubeEnv('SonarQube') {{
+                  sh 'npm install sonar-scanner'
+                  sh 'npm run sonar'
+                }
+            }
+        
       }
     }
     stage('Push to Dockerhub') {
