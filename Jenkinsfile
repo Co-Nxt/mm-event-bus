@@ -45,19 +45,19 @@ pipeline {
    steps {
       echo 'Scanning'
     
-        withSonarQubeEnv(installationName:'SonarQube') {
-            script {
-                sh 'docker run --rm \
-                    -e SONAR_HOST_URL=http://localhost:9000 \
-                    -e SONAR_LOGIN={AQAAABAAAAAwG25KPwoCEGoAoUfYvkFhSsUsg6rKNY1wjcTF4e3mzZSos0sTrr+/UWr+oECyC9Ldj7lJpbwHIVHBXDDsCccB0w==} \
-                    "${DOCKER_IMAGE_NAME}:${BUILD_NUMBER}" ./node_modules/.bin/sonar-scanner -Dproject.settings=sonar-project.properties'
+        // withSonarQubeEnv(installationName:'SonarQube') {
+        //     script {
+        //         sh 'docker run --rm \
+        //             -e SONAR_HOST_URL=http://localhost:9000 \
+        //             -e SONAR_LOGIN={AQAAABAAAAAwG25KPwoCEGoAoUfYvkFhSsUsg6rKNY1wjcTF4e3mzZSos0sTrr+/UWr+oECyC9Ldj7lJpbwHIVHBXDDsCccB0w==} \
+        //             "${DOCKER_IMAGE_NAME}:${BUILD_NUMBER}" ./node_modules/.bin/sonar-scanner -Dproject.settings=sonar-project.properties'
               
 
-                // sh 'docker run --rm -e SONAR_HOST_URL=http://host.docker.internal:9000 -v "$(pwd):/mm-event-bus" sonarqube-article'
+        //         // sh 'docker run --rm -e SONAR_HOST_URL=http://host.docker.internal:9000 -v "$(pwd):/mm-event-bus" sonarqube-article'
 
-              // sh './node_modules/.bin/sonar-scanner -Dproject.settings=sonar-project.properties'
-            }
-        }
+        //       // sh './node_modules/.bin/sonar-scanner -Dproject.settings=sonar-project.properties'
+        //     }
+        // }
    }
     }
     stage('Push to Dockerhub') {
