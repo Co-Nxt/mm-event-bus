@@ -27,9 +27,7 @@ pipeline {
             steps {
               script {
                         //docker.build("konicsdev/even-bus:${env.BUILD_NUMBER}")
-              sh'docker build -t ${DOCKER_IMAGE_NAME
-                        }:${BUILD_NUMBER
-                        } .'
+              sh'docker build -t ${DOCKER_IMAGE_NAME}:${BUILD_NUMBER} .'
               echo'Building..'
                     }
                 }
