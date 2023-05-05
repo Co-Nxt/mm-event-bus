@@ -20,8 +20,7 @@ pipeline {
                   currentBuild.setDescription(description)
                   
               slackSend channel: '#jenkins-pipeline-notifications', color: 'good', message: "started ${env.JOB_NAME} \n
-              ${env.BUILD_NUMBER}  \n
-              (<${env.BUILD_URL}|Open>)"
+              ${env.BUILD_NUMBER}  \n"
             }
         }
     }
