@@ -19,8 +19,8 @@ pipeline {
               def description = "<br> <b>Branch: </b> ${branchName}<br> <b>Commit ID:</b> ${commitId} <br> <b>Author:</b> ${commitAuthor} <br> <b> CommitMessage: </b> ${commitMessage} <br>"
                   currentBuild.setDescription(description)
                   
-              slackSend channel: '#jenkins-pipeline-notifications', color: 'good', message: "started ${env.JOB_NAME} \n
-              ${env.BUILD_NUMBER}  \n"
+              slackSend channel: '#jenkins-pipeline-notifications', color: 'good', message: "started ${env.JOB_NAME} \n \
+              ${env.BUILD_NUMBER}  \n \"
             }
         }
     }
