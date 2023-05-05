@@ -25,19 +25,32 @@ pipeline {
       }
     }
     stage('Build Docker Image') {
-      steps {
-        //docker.build("konicsdev/even-bus:${env.BUILD_NUMBER}")
-        sh'docker build -t ${DOCKER_IMAGE_NAME}:${BUILD_NUMBER} .'
-        echo'Building..'
+      parallel{
+        stage('docker-build'){
+          steps {
+            script {
+              sh'docker build -t ${DOCKER_IMAGE_NAME}:${BUILD_NUMBER} .'
+              echo'Building..'
+            }
+          }
+        }
       }
     }
-    stage('Test') {
+     stage('Push Image to Artifactory') {
       steps {
-        // sh 'docker run konicsdev/event-bus npm test'
-        echo'Testing..'
-
+        sh 'docker login -u konicsdev -p konics.dev'
+        sh 'docker push ${DOCKER_IMAGE_NAME}:${BUILD_NUMBER}'
+        //sh'docker build -t konicsdev/even-bus .'
+        echo'Pushing..'
+      }
+      stage('Deploy to Environment') {
+      steps {
+         sh "sshpass -p 'La7}_,CvuWvT]aS5' ssh -o StrictHostKeyChecking=no $VULTR_SERVER_USER@$VULTR_SERVER_IP -p $VULTR_SERVER_SSH_PORT 'docker stop $CONTAINER_NAME || true && docker rm $CONTAINER_NAME || true && docker pull $DOCKER_IMAGE_NAME:$BUILD_NUMBER && docker run -d --name $CONTAINER_NAME -p 80:80 $DOCKER_IMAGE_NAME:$BUILD_NUMBER'"
+         echo'Deploy..'
       }
     }
+    }
+   
     stage ('SonarQube analysis'){
       when{
         branch 'develop'
@@ -61,20 +74,7 @@ pipeline {
             }
         }
    }
-    }
-    stage('Push to Dockerhub') {
-      steps {
-        sh 'docker login -u konicsdev -p konics.dev'
-        sh 'docker push ${DOCKER_IMAGE_NAME}:${BUILD_NUMBER}'
-        //sh'docker build -t konicsdev/even-bus .'
-        echo'Pushing..'
-      }
-    }
-    stage('Deploy') {
-      steps {
-         sh "sshpass -p 'La7}_,CvuWvT]aS5' ssh -o StrictHostKeyChecking=no $VULTR_SERVER_USER@$VULTR_SERVER_IP -p $VULTR_SERVER_SSH_PORT 'docker stop $CONTAINER_NAME || true && docker rm $CONTAINER_NAME || true && docker pull $DOCKER_IMAGE_NAME:$BUILD_NUMBER && docker run -d --name $CONTAINER_NAME -p 80:80 $DOCKER_IMAGE_NAME:$BUILD_NUMBER'"
-         echo'Deploy..'
-      }
-    }
+    }   
+  
   }
 }
