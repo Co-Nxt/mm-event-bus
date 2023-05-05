@@ -7,6 +7,7 @@ pipeline {
         VULTR_SERVER_SSH_PORT = '22'
         CONTAINER_NAME = "eventbus"
         //test pooling
+        PATH = "$PATH:/sonar-scanner/bin"
     }
   stages {
     stage('Setup') {
@@ -21,6 +22,7 @@ pipeline {
         def description = "<br> <b>Branch: </b> ${branchName}<br> <b>Commit ID:</b> ${commitId} <br> <b>Author:</b> ${commitAuthor} <br> <b> CommitMessage: </b> ${commitMessage} <br>"
           currentBuild.setDescription(description)
        sh 'echo ${commitMessage}'
+       sh 'echo $PATH'
        }
       }
     }
