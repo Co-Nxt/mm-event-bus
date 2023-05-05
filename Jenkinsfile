@@ -18,6 +18,9 @@ pipeline {
               def commitAuthor = sh(returnStdout: true, script: 'git log -1 --pretty=format:"%an"').trim()
               def description = "<br> <b>Branch: </b> ${branchName}<br> <b>Commit ID:</b> ${commitId} <br> <b>Author:</b> ${commitAuthor} <br> <b> CommitMessage: </b> ${commitMessage} <br>"
                   currentBuild.setDescription(description)
+              slackSend channel: '#jenkins-pipeline-notifications', color: 'good', message: 'Setup :  \n \
+              Branch: ${branchName} \n \
+              Commit ID: ${commitId}'
             }
         }
     }
@@ -60,8 +63,8 @@ pipeline {
       stage('Deploy to Environment') {
         steps {
             script{
-            sh "sshpass -p 'La7}_,CvuWvT]aS5' ssh -o StrictHostKeyChecking=no $VULTR_SERVER_USER@$VULTR_SERVER_IP -p $VULTR_SERVER_SSH_PORT 'docker stop $CONTAINER_NAME || true && docker rm $CONTAINER_NAME || true && docker pull $DOCKER_IMAGE_NAME:$BUILD_NUMBER && docker run -d --name $CONTAINER_NAME -p 80:80 $DOCKER_IMAGE_NAME:$BUILD_NUMBER'"
-            echo'Deploy..'
+            sh "sshpass -p 'La7}_,CvuWvT]aS5' ssh -o StrictHostKeyChecking=no $VULTR_SERVER_USER@$VULTR_SERVER_IP -p $VULTR_SERVER_SSH_PORT 'docker stop $CONTAINER_NAME || true && docker rm $CONTAINER_NAME || true && docker pull $DOCKER_IMAGE_NAME:$BUILD_NUMBER && docker run -d --name $CONTAINER_NAME -p 80:80 $DOCKER_IMAGE_NAME:$BUILD_NUMBER'"           
+            slackSend channel: '#jenkins-pipeline-notifications', color: 'good', message: 'Successfully Deployed'
             }
         }
     }
