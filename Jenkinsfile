@@ -6,7 +6,7 @@ pipeline {
         VULTR_SERVER_USER = 'root'
         VULTR_SERVER_SSH_PORT = '22'
         CONTAINER_NAME = "eventbus"
-   //test pooling 
+   //test pooling  z
    }
   stages {
       stage('Setup') {
